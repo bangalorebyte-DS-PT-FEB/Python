@@ -1,0 +1,63 @@
+'''Two words are “rotate pairs” if you can rotate one of them and get the other (see above problem)
+ Write a program that reads a wordlist and finds all the rotate pairs. Hint: Use a dictionary'''
+
+def word_dictionary():
+    word_dict=dict()
+
+    fh=open("words1.txt")
+
+    for line in fh:
+        word=line.strip()
+        word_dict[word]=None
+
+    return word_dict
+
+def rotate_pairs(word,word_dict):
+   # lst_rotate_pairs=[]
+    for i in range(1,6):
+        rotated=rotate_word(word,i)
+        if rotated.lstrip() in word_dict:
+            print(word,i,rotated)
+         #  lst_rotate_pairs+= ['rotate ' + str(i) + ': ' + word + ' / ' + rotated]
+          # print(lst_rotate_pairs)
+
+
+import string
+
+
+def rotate_letter(letter, n):
+    """Rotates a letter by n places.  Does not change other chars.
+
+    letter: single-letter string
+    n: int
+
+    Returns: single-letter string
+    """
+    if letter.isupper():
+        start = ord('A')
+    elif letter.islower():
+        start = ord('a')
+    else:
+        return letter
+
+    c = ord(letter) - start
+    i = (c + n) % 26 + start
+    return chr(i)
+
+
+def rotate_word(word, n):
+    """Rotates a word by n places.
+
+    word: string
+    n: integer
+
+    Returns: string
+    """
+    res = ''
+    for letter in word:
+        res += rotate_letter(letter, n)
+    return res
+
+word_dict=word_dictionary()
+for word in word_dict:
+    rotate_pairs(word,word_dict)

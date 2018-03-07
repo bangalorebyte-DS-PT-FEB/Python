@@ -1,0 +1,20 @@
+''Write a function called most_frequent that takes a string and prints the letters in decreasing order of frequency. Hint: Use a tuple'''
+
+from collections import Counter
+
+def most_frequent(string):
+    a_string=string.replace(" ","")
+    letterdict={}
+    result=[]
+
+
+    for letter in a_string:
+        letterdict[letter]=letterdict.get(letter,0)+1
+
+    for letter,freq in letterdict.items():
+        result+=[(letter,freq)]
+    result.sort(reverse=True)
+    print(tuple(result))
+
+
+most_frequent("hannabarberr
